@@ -1,0 +1,11 @@
+# LoRA/QLoRA SFT 云端环境（Python 3.10+，CUDA 12.x）
+# Qwen2.5-1.5B：默认 QLoRA 4bit → 单卡 ~12GB；关 4bit(LOAD_4BIT=0) 走 bf16 → 需 ~24GB+
+torch>=2.1
+transformers>=4.46
+peft>=0.13
+trl>=0.12          # SFTConfig/SFTTrainer 新版 API；若版本不符见 README 调整说明
+datasets>=2.19
+accelerate>=0.34
+bitsandbytes>=0.43 # QLoRA 4bit 量化(7B 默认需要)
+sentencepiece
+# 国内拉模型慢可用 ModelScope：pip install modelscope，并设 BASE_MODEL 为本地下载路径

@@ -1,0 +1,40 @@
+# 金融研报 RAG 全栈编排：独立 Elasticsearch + API 服务
+# 一键起：docker compose up -d --build
+# 首次起来后 ES 是空的，灌数据(嵌入入索引)：
+#   docker compose exec app python index_es.py        # 约数分钟(CPU 嵌入1222块)
+# 验证：curl http://localhost:8000/stocks
+# 注：宿主已有 ES 占 9200 → 本 compose 的 ES 暴露在 9201；app 容器内走 compose 网络连 es:9200。
+services:
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=infini_rag_flow
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ports: ["9201:9200"]                         # 宿主 9201 → 容器 9200(避开已占用的 9200)
+    volumes: ["esdata:/usr/share/elasticsearch/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s -u elastic:infini_rag_flow http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+
+  app:
+    build: .
+    image: finrag-api
+    ports: ["8000:8000"]
+    env_file: ["../ai面试八股rag/.env"]           # DeepSeek key
+    environment:
+      - PYTHONUTF8=1
+      - HF_HUB_OFFLINE=1
+      - ES_URL=http://es:9200                      # compose 网络内连 ES(代码已支持 ES_URL)
+    volumes:
+      - ./models:/app/models                       # 微调 bge(嵌入/检索)
+      - ./data:/app/data                           # 语料/缓存/产物
+    depends_on:
+      es:
+        condition: service_healthy
+
+volumes:
+  esdata:

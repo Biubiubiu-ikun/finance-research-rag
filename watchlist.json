@@ -1,0 +1,29 @@
+{
+  "_comment": "研报采集标的清单(单一数据源)。加标的只改这里。industry=大类(用于组织/统计;入库 industry 由 LLM 从研报抽取+normalize_industry)。existing=已在库(增量只爬 since_existing 起);新标的爬 since_new 起。",
+  "since_existing": "2024-01-01",
+  "since_new": "2024-01-01",
+  "stocks": [
+    {"code": "688981", "name": "中芯国际", "industry": "半导体", "existing": true},
+    {"code": "002371", "name": "北方华创", "industry": "半导体", "existing": true},
+    {"code": "603501", "name": "韦尔股份", "industry": "半导体", "existing": true},
+    {"code": "603986", "name": "兆易创新", "industry": "半导体", "existing": true},
+    {"code": "600183", "name": "生益科技", "industry": "半导体", "existing": true},
+    {"code": "300750", "name": "宁德时代", "industry": "新能源", "existing": true},
+    {"code": "002594", "name": "比亚迪", "industry": "新能源", "existing": true},
+    {"code": "300274", "name": "阳光电源", "industry": "新能源", "existing": true},
+    {"code": "601012", "name": "隆基绿能", "industry": "新能源", "existing": true},
+    {"code": "600276", "name": "恒瑞医药", "industry": "医药生物", "existing": false},
+    {"code": "300760", "name": "迈瑞医疗", "industry": "医药生物", "existing": false},
+    {"code": "603259", "name": "药明康德", "industry": "医药生物", "existing": false},
+    {"code": "600519", "name": "贵州茅台", "industry": "食品饮料", "existing": false},
+    {"code": "000858", "name": "五粮液", "industry": "食品饮料", "existing": false},
+    {"code": "600036", "name": "招商银行", "industry": "银行金融", "existing": false},
+    {"code": "002142", "name": "宁波银行", "industry": "银行金融", "existing": false},
+    {"code": "600760", "name": "中航沈飞", "industry": "国防军工", "existing": false},
+    {"code": "002179", "name": "中航光电", "industry": "国防军工", "existing": false},
+    {"code": "000333", "name": "美的集团", "industry": "家电", "existing": false},
+    {"code": "000651", "name": "格力电器", "industry": "家电", "existing": false},
+    {"code": "300308", "name": "中际旭创", "industry": "通信算力", "existing": false},
+    {"code": "002475", "name": "立讯精密", "industry": "通信算力", "existing": false}
+  ]
+}

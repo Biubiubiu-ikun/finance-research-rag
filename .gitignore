@@ -1,0 +1,24 @@
+# ===== 模型权重（太大，走 HuggingFace / 网盘，见 README「模型获取」） =====
+Qwen2.5-7B-Instruct/
+Qwen2.5-1.5B-Instruct/
+models/
+out/                      # LoRA adapter + 训练 checkpoint（adapter 另发布）
+
+# ===== 原始 / 中间数据（体积大、可由脚本重建；保留小产物用于演示） =====
+data/reports/             # 原始研报 PDF（~218MB）
+data/reports_skipped/     # 隔离的坏/卡死 PDF
+data/parsed/              # DeepDOC 解析中间产物（可重建）
+data/_meta_tmp/
+data/logs/
+# 保留并入库的小产物：data/analysis(聚合md) / data/structured / data/chunks /
+#                      data/eval / data/train / data/metadata —— 让 UI 与评测可直接看
+
+# ===== 密钥 / 缓存 / 临时 =====
+.env
+*.key
+__pycache__/
+*.pyc
+*.log
+.streamlit/
+.ipynb_checkpoints/
+.DS_Store
