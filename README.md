@@ -9,6 +9,14 @@
 
 <p align="center"><img src="docs/architecture.svg" alt="金融研报 RAG 全链路架构" width="720"></p>
 
+## 🎬 演示
+
+<p align="center">
+  <video src="https://github.com/Biubiubiu-ikun/finance-research-rag/raw/main/docs/demo.mp4" controls muted width="760"></video>
+</p>
+
+> 若上方视频未内嵌播放，点此查看 ▶ [docs/demo.mp4](docs/demo.mp4)
+
 ---
 
 ## 核心亮点
@@ -87,7 +95,7 @@ streamlit run finrag/serving/app.py    # → http://localhost:8501
 #   或服务化： uvicorn finrag.serving.api:app --reload
 ```
 
-### Demo 怎么演（5 个 tab）
+### Demo 
 1. **💬 智能问答**：自由提问 → Agent 多工具调度 → 答案 + **可溯源的工具调度轨迹**（每个数字取自哪个工具/机构一眼可查）。
 2. **🧭 多维简报**：复杂任务 → Planner 拆解 → 多 Worker **并行**调研 → 简报，附**并行加速比**。
 3. **📊 标的速览**：选标的渲染 盈利预测一致预期 / 观点聚合 / 预测修正 / 股价回测，自带 ✓/◐/✗ 防幻觉标记；**句级核查引擎可切 DeepSeek / 本地蒸馏 Qwen**。
@@ -107,10 +115,10 @@ streamlit run finrag/serving/app.py    # → http://localhost:8501
 
 ---
 
-## 已知局限与取舍（主动说明）
+## 已知局限与取舍
 
 - **评测规模**：生成/Agent 评测 20/45 题（含 17 越界拒答）；LLM-judge 有自身偏差，最严谨应扩**人工标注黄金集**。
-- **蒸馏小模型**：偏保守、本地延迟高于 API，**故不作默认核查引擎**——这是有数据支撑的工程判断，价值在于"会做全流程 + 诚实负结果"，非"上线更优方案"。
+- **蒸馏小模型**：偏保守、本地延迟高于 API，**故不作默认核查引擎**。
 - **图表理解**：研报图表未做 VLM 解析（性价比考量，已跳过）。
 - **定位**：`harness.py` 是**领域专用 Agent 运行时**，非 LangChain/Claude-Code 那种带沙箱/上下文压缩的通用框架。
 
